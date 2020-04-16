@@ -13,6 +13,7 @@
   "autoload" : {
     "psr-4" : {
       "TBlack\\MondayAPI\\": "src/MondayAPI",
+      "TBlack\\MondayAPI\\Objects\\": "src/MondayAPI/Objects",
       "TBlack\\MondayAPI\\Querying\\": "src/MondayAPI/Querying"
     }
   },
