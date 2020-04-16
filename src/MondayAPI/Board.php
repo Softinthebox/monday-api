@@ -1,8 +1,10 @@
-<?php 
+<?php
 
 namespace TBlack\MondayAPI;
 
-class MondayBoard extends MondayAPI
+use TBlack\MondayAPI\MondayAPI as MondayAPI;
+
+class Board extends MondayAPI
 {
 	protected $struct_board = array(
 		'limit' 		=> 'Int',
@@ -21,18 +23,18 @@ class MondayBoard extends MondayAPI
 
 	public function getBoards( $get = false, $args = false )
 	{
-		return $this->request( 
-			self::TYPE_QUERY, 
+		return $this->request(
+			self::TYPE_QUERY,
 			$this->board(
-				$this->buildArgs( 
-					$this->build( 
-						'struct_board', 
+				$this->buildArgs(
+					$this->build(
+						'struct_board',
 						$args
-					) 
-				), 
+					)
+				),
 				$get
 			)
-		);	
+		);
 	}
 }
 
