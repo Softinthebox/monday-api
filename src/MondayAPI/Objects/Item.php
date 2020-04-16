@@ -1,6 +1,6 @@
 <?php
 
-namespace TBlack\MondayAPI;
+namespace TBlack\MondayAPI\Objects;
 
 class Item extends MondayAPI
 {

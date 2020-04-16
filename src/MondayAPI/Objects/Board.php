@@ -1,10 +1,10 @@
 <?php
 
-namespace TBlack\MondayAPI;
+namespace TBlack\MondayAPI\Objects;
 
 use TBlack\MondayAPI\MondayAPI as MondayAPI;
-use TBlack\MondayAPI\Columns as Columns;
-use TBlack\MondayAPI\Item as Item;
+use TBlack\MondayAPI\Objects\Column as Column;
+use TBlack\MondayAPI\Objects\Item as Item;
 
 class Board extends MondayAPI
 {
@@ -51,7 +51,7 @@ class Board extends MondayAPI
 					$values
 				)
 			),
-			$this->collection(Board::$struct_collection_board, $fields)
+			$this->collection->get(Board::$struct_collection_board, $fields)
 		);
 
 		return $this->request( self::TYPE_QUERY, $boards );
@@ -62,7 +62,7 @@ class Board extends MondayAPI
 		$columns = $this->create(
 			'columns', 
 			'', 
-			$this->collection(Columns::$struct_columns, $fields)
+			$this->collection->get(Column::$struct_columns, $fields)
 		);
 
 		$boards = $this->create(

@@ -1,8 +1,8 @@
 <?php
 
-namespace TBlack\MondayAPI;
+namespace TBlack\MondayAPI\Objects;
 
-class Columns extends MondayAPI
+class Column extends MondayAPI
 {
 	static $struct_columns = array(
 		'archived' 		=> '!Boolean',

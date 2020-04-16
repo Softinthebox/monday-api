@@ -2,6 +2,8 @@
 
 namespace TBlack\MondayAPI;
 
+use TBlack\MondayAPI\Querying\Collection as Collection;
+
 class MondayAPI
 {	
 	private $APIV2_Token;
@@ -14,6 +16,7 @@ class MondayAPI
 	function __construct($debug=false)
 	{
 		$this->debug = $debug;
+		$this->collection = new Collection();
 	}
 
 	public function setToken($token)
@@ -122,23 +125,6 @@ class MondayAPI
 	{
 		$_fields_ = (is_array($fields)&&!empty($fields))?implode(' ', $fields):'';
 		return $name.$arguments.'{ '.$_fields_.' }';
-	}
-
-	public function collection( Array $struct, Array $args = [] )
-	{	
-		$collection = array();
-		if(empty($args)){
-			foreach ($struct as $key => $value) {
-				$collection[]=$key;
-			}
-		}else{
-			foreach ($args as $value) {
-				if(isset($struct[$value])){
-					$collection[]=$value;
-				}
-			}
-		}
-		return $collection;;
 	}
 }
 
