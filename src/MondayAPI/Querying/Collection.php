@@ -2,8 +2,8 @@
 
 namespace TBlack\MondayAPI\Querying;
 
-use TBlack\MondayAPI\Column as Column;
-use TBlack\MondayAPI\Item as Item;
+use TBlack\MondayAPI\Objects\Column as Column;
+use TBlack\MondayAPI\Objects\Item as Item;
 
 class Collection
 {
@@ -32,10 +32,8 @@ class Collection
 	{
 		if($type[0]==='['){
 
-			$class_name = substr($type, 1, -1);
-
-			var_dump($class_name);
-
+			$class_name = 'TBlack\MondayAPI\Objects\\'.substr($type, 1, -1);
+			
 			if( class_exists($class_name) ){
 
 				var_dump($class_name); die();

@@ -1,12 +1,12 @@
 <?php
 
-namespace TBlack\MondayAPI\Objects;
+namespace TBlack\MondayAPI\;
 
-use TBlack\MondayAPI\MondayAPI as MondayAPI;
-use TBlack\MondayAPI\Objects\Column as Column;
-use TBlack\MondayAPI\Objects\Item as Item;
+use TBlack\MondayAPI\ObjectTypes\Board as Board;
+use TBlack\MondayAPI\ObjectTypes\Column as Column;
+use TBlack\MondayAPI\ObjectTypes\Item as Item;
 
-class Board extends MondayAPI
+class MondayBoard extends MondayAPI
 {
 	static $struct_arguments_board = array(
 		'limit' 		=> 'Int',

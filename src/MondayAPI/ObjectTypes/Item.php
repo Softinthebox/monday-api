@@ -1,8 +1,10 @@
 <?php
 
-namespace TBlack\MondayAPI\Objects;
+namespace TBlack\MondayAPI\ObjectTypes;
 
-class Item extends MondayAPI
+use TBlack\MondayAPI\ObjectTypes\ObjectModel as ObjectModel;
+
+class Item extends ObjectModel
 {
 
 	static $struct_arguments_item = array(

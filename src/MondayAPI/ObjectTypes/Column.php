@@ -1,8 +1,10 @@
 <?php
 
-namespace TBlack\MondayAPI\Objects;
+namespace TBlack\MondayAPI\ObjectTypes;
 
-class Column extends MondayAPI
+use TBlack\MondayAPI\ObjectTypes\ObjectModel as ObjectModel;
+
+class Column extends ObjectModel
 {
 	static $struct_columns = array(
 		'archived' 		=> '!Boolean',
@@ -14,6 +16,5 @@ class Column extends MondayAPI
 		'width' 		=> 'Int',
 	);
 }
-
 
 ?>
