@@ -26,7 +26,7 @@ Examples
 require 'vendor/autoload.php';
 
 $token = 'API_TOKEN';
-$MondayBoard = new TBlack\MondayAPI\MondayBoard(true);
+$MondayBoard = new TBlack\MondayAPI\MondayBoard();
 $MondayBoard->setToken(new TBlack\MondayAPI\Token($token));
 
 // gel All Boards
