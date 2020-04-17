@@ -6,53 +6,37 @@ use TBlack\MondayAPI\MondayAPI;
 use TBlack\MondayAPI\ObjectTypes\Board;
 use TBlack\MondayAPI\ObjectTypes\Column;
 use TBlack\MondayAPI\ObjectTypes\Item;
+use TBlack\MondayAPI\Querying\Query;
 
 class MondayBoard extends MondayAPI
 {
-	static $struct_arguments_board = array(
-		'limit' 		=> 'Int',
-		'page' 			=> 'Int',
-		'ids' 			=> '[Int]',
-		'board_kind' 	=> 'BoardKind',	// (public / private / share)
-		'state' 		=> 'State',		// (all / active / archived / deleted)
-		'newest_first' 	=> 'Boolean',
-	);
-
-	static $struct_collection_board = array(
-		'activity_logs' 		=> [ 'type' => '[ActivityLogType]' ],
-		'board_folder_id' 		=> [ 'type' => 'Int' ],
-		'board_kind' 			=> [ 'type' => 'BoardKind' ],
-		'columns' 				=> [ 'type' => '[Column]' ],
-		'communication' 		=> [ 'type' => 'JSON' ],
-		'description' 			=> [ 'type' => 'String' ],
-		'groups' 				=> [ 'type' => '[Group]' ],
-		'id' 					=> [ 'type' => '!ID' ],
-		'items' 				=> [ 'type' => '[Item]' ],
-		'name' 					=> [ 'type' => '!String' ],
-	);
-
 	private $board_id = false;
+	private $group_id = false;
 
-	public function enter( Int $board_id )
+	public function on( Int $board_id )
 	{
 		$this->board_id = $board_id;
 		return $this;
 	}
 
-	public function getBoards( Array $fields = [], Array $values = [] )
+	public function group( String $group_id )
 	{
-		if($this->board_id!==false&&!isset($values['ids'])){
-			$values['ids']=$this->board_id;
+		$this->group_id = $group_id;
+		return $this;
+	}
+
+	public function getBoards( Array $arguments = [], Array $fields = [])
+	{
+		$Board = new Board();
+
+		if($this->board_id!==false&&!isset($arguments['ids'])){
+			$arguments['ids']=$this->board_id;
 		}
-		$boards = $this->create(
-			'boards',
-			$this->buildArguments(
-				$this->buildArgsFields(
-					Board::$struct_arguments_board,
-					$values
-				)
-			),
-			$this->collection->get(Board::$struct_collection_board, $fields)
+
+		$boards = Query::create( 
+			Board::$scope, 
+			$Board->getArguments($arguments), 
+			$Board->getFields($fields) 
 		);
 
 		return $this->request( self::TYPE_QUERY, $boards );
@@ -60,24 +44,46 @@ class MondayBoard extends MondayAPI
 
 	public function getColumns( Array $fields = [] )
 	{
-		$columns = $this->create(
-			'columns', 
+		$Column = new Column();
+		$Board = new Board();
+
+		$columns = Query::create( 
+			Column::$scope, 
 			'', 
-			$this->collection->get(Column::$struct_columns, $fields)
+			$Column->getFields($fields) 
 		);
 
-		$boards = $this->create(
-			'boards', 
-			$this->buildArguments(
-				$this->buildArgsFields( 
-					Board::$struct_arguments_board, 
-					['ids'=>$this->board_id] 
-				)
-			), 
+		$boards = Query::create( 
+			Board::$scope, 
+			$Board->getArguments(['ids'=>$this->board_id]), 
 			[$columns]
 		);
 
 		return $this->request( self::TYPE_QUERY, $boards );
+	}
+
+	public function addItem( String $item_name, Array $itens = [] )
+	{
+		if(!$this->board_id || !$this->group_id)
+			return -1;
+
+		$arguments = [
+			'board_id'		=> $this->board_id,
+			'group_id'		=> $this->group_id,
+			'item_name' 	=> $item_name,
+			'column_values' => Column::newColumnValues( $itens ),
+		];
+
+		$Item = new Item();
+
+		$create = Query::create( 
+			'create_item', 
+			$Item->getArguments($arguments, Item::$create_item_arguments), 
+			$Item->getFields(['id']) 
+		);
+
+		return $this->request(self::TYPE_MUTAT, $create);
+
 	}
 }
 

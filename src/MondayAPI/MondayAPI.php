@@ -2,8 +2,6 @@
 
 namespace TBlack\MondayAPI;
 
-use TBlack\MondayAPI\Querying\Collection;
-
 class MondayAPI
 {	
 	private $APIV2_Token;
@@ -16,7 +14,13 @@ class MondayAPI
 	function __construct($debug=false)
 	{
 		$this->debug = $debug;
-		$this->collection = new Collection();
+	}
+
+	private function printDebug($print)
+	{
+		echo '<div style="background: #f9f9f9; padding: 20px; position: relative; border: solid 1px #dedede;">
+		'.$print.'
+		</div>';
 	}
 
 	public function setToken($token)
@@ -28,7 +32,7 @@ class MondayAPI
 	private function content($type, $request)
 	{
 		if($this->debug){
-			echo $type.' { '.$request.' } '; die();
+			$this->printDebug( $type.' { '.$request.' } ' );
 		}
 
 		return json_encode(['query' => $type.' { '.$request.' } ']);
@@ -39,7 +43,7 @@ class MondayAPI
 		$headers = [ 
 			'Content-Type: application/json', 
 			'User-Agent: [Tblack-IT] GraphQL Client', 
-			'Authorization: ' . $this->APIV2_Token
+			'Authorization: ' . $this->APIV2_Token->getToken()
 		];
 		
 		$data = @file_get_contents($this->API_Url, false, stream_context_create([
@@ -50,81 +54,22 @@ class MondayAPI
 		    ]
 		]));
 
-		return json_decode($data, true);
+		return $this->response( $data );
 	}
 
-	protected function array_map_assoc( $callback , $array )
+	protected function response( $data )
 	{
-  		$r = array();
-  		foreach ($array as $key=>$value)
-    		$r[$key] = $callback($key,$value);
-  		return $r;
-	}
+		if(!$data)
+			return false;
+		
+		$json = json_decode($data, true);
 
-	/*
-	* 	Build Args string
-	*
-	* 	array 	=> 	ex.: ['ids'=>212121,'name'=>'teste']
-	* 
-	* 	@return =>	ex.: (ids:212121,name:"teste")
-	*/
-	protected function buildArguments( Array $array )
-	{
-		if(empty($array))
-			return '';
-
-		return '(' . implode(',',$this->array_map_assoc(function($k,$v){
-			if(is_string($v)){
-				return $k.':"'.$v.'"';
-			}elseif(is_array($v)){
-				return $k.':'.json_encode($v).'';
-			}
-			return "$k:$v";
-		},$array)). ')';
-	}
-
-	/*
-	*	Build ArgsArray for buildArgs. 
-	*	This function checks your DATA with the given data structure
-	*
-	*	struct 	=> ex.: ['ids'=>'Int','name'=>'String']
-	*	key 	=> ex.: ["name"=>"value"] or "name"
-	*	value 	=> ex.: "value"
-	*
-	* 	@return => ex.: ["name"=>"value"]
-	*/
-	protected function buildArgsFields( $struct, $key, $value = false )
-	{
-		$builded = array();
-		if(is_array($key)){
-			if(!empty($key)){
-				foreach ($key as $_key => $_value) {
-					$extra = $this->buildArgsFields( $struct, $_key, $_value);
-					if(is_array($extra)&&!empty($extra))
-						$builded = array_merge($builded, $extra);
-				}
-			}
-		}else{
-			if(isset($struct[$key])){
-				$builded[$key] = $value;
-			}
+		if( isset($json['data']) ){
+			return $json['data'];
+		}else if( isset($json['errors']) && is_array($json['errors']) ){
+			return $json['errors'];
 		}
-		return $builded;
-	}
-
-	/*
-	*	Create final request string. 
-	*
-	*	name 		=> ex.: boards
-	*	arguments 	=> ex.: (ids:212121,name:"teste")
-	*	fields 		=> ex.: ['id', 'type', 'name']
-	*
-	* 	@return => ex.: boards($arguments){ $fields }
-	*/
-	protected function create( String $name, String $arguments = '', Array $fields = [] )
-	{
-		$_fields_ = (is_array($fields)&&!empty($fields))?implode(' ', $fields):'';
-		return $name.$arguments.'{ '.$_fields_.' }';
+		return false;
 	}
 }
 

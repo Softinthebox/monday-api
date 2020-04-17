@@ -2,9 +2,10 @@
 
 namespace TBlack\MondayAPI\ObjectTypes;
 
+use TBlack\MondayAPI\Querying\Query;
+
 class ObjectModel
 {
-	
 	// Query scope
 	static $scope = '';
 
@@ -16,14 +17,33 @@ class ObjectModel
 
 	function __construct()
 	{
+		return $this;
 	}
 
-	protected function getFields()
+	public function getFields( Array $fields = [], $alt_fields = false )
 	{
+		return [ Query::buildFields(
+			Query::buildFieldsArgs( 
+				($alt_fields==false?static::$fields:$alt_fields), 
+				$fields
+			)
+		)];
 	}
 
-	protected function getArguments()
+	public function getArguments( Array $arguments = [], $alt_arguments = false )
 	{	
+		return Query::buildArguments(
+			Query::buildArgsFields(
+				($alt_arguments==false?static::$arguments:$alt_arguments),
+				$arguments
+			)
+		);
+	}
+
+	public function getBuildFieldsArgs()
+	{
+		//return '{ ... }';
+		return false;
 	}
 }
 

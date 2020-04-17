@@ -22,28 +22,26 @@ class Board extends ObjectModel
 
 	// Fields
 	static $fields = array(
-		'activity_logs' 		=> [ 'type' => '[ActivityLogType]' 	],
-		'board_folder_id' 		=> [ 'type' => 'Int' 				],
-		'board_kind' 			=> [ 'type' => 'BoardKind' 			],
-		'columns' 				=> [ 'type' => '[Column]' 			],
-		'communication' 		=> [ 'type' => 'JSON'				],
-		'description' 			=> [ 'type' => 'String' 			],
-		'groups' 				=> [ 'type' => '[Group]' 			],
-		'id' 					=> [ 'type' => '!ID' 				],
-		'items' 				=> [ 'type' => '[Item]'				],
-		'name' 					=> [ 'type' => '!String'			],
-		'owner' 				=> [ 'type' => '!User'				],
-		'permissions' 			=> [ 'type' => '!String'			],
-		'pos' 					=> [ 'type' => 'String'				],
-		'state' 				=> [ 'type' => '!State'				],
-		'subscribers' 			=> [ 'type' => '![User]'			],
-		'tags' 					=> [ 'type' => '[Tag]'				],
-		'top_group' 			=> [ 'type' => '!Group'				],
-		'updates' 				=> [ 'type' => '[Update]'			],
-		'views' 				=> [ 'type' => '[BoardView]'		]
-	);
-
-	
+		'activity_logs' 	=> [ 'type' => '[ActivityLogType]'  , 'object' => 'ActivityLogType' ],
+		'board_folder_id' 	=> [ 'type' => 'Int' 				],
+		'board_kind' 		=> [ 'type' => 'BoardKind' 			],
+		'columns' 			=> [ 'type' => '[Column]' 			, 'object' => 'Column' ],
+		'communication' 	=> [ 'type' => 'JSON'				],
+		'description' 		=> [ 'type' => 'String' 			],
+		'groups' 			=> [ 'type' => '[Group]' 			, 'object' => 'Group' ],
+		'id' 				=> [ 'type' => '!ID' 				],
+		'items' 			=> [ 'type' => '[Item]'				, 'object' => 'Item' ],
+		'name' 				=> [ 'type' => '!String'			],
+		'owner' 			=> [ 'type' => '!User'				, 'object' => 'User' ],
+		'permissions' 		=> [ 'type' => '!String'			],
+		'pos' 				=> [ 'type' => 'String'				],
+		'state' 			=> [ 'type' => '!State'				],
+		'subscribers' 		=> [ 'type' => '![User]'			, 'object' => 'User' ],
+		'tags' 				=> [ 'type' => '[Tag]'				, 'object' => 'Tag' ],
+		'top_group' 		=> [ 'type' => '!Group'				, 'object' => 'Group' ],
+		'updates' 			=> [ 'type' => '[Update]'			, 'object' => 'Update' ],
+		'views' 			=> [ 'type' => '[BoardView]'		, 'object' => 'BoardView' ]
+	);	
 }
 
 
