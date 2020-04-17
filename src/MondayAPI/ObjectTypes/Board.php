@@ -2,9 +2,9 @@
 
 namespace TBlack\MondayAPI\ObjectTypes;
 
-use TBlack\MondayAPI\ObjectTypes\ObjectModel as ObjectModel;
-use TBlack\MondayAPI\ObjectTypes\Column as Column;
-use TBlack\MondayAPI\ObjectTypes\Item as Item;
+use TBlack\MondayAPI\ObjectTypes\ObjectModel;
+use TBlack\MondayAPI\ObjectTypes\Column;
+use TBlack\MondayAPI\ObjectTypes\Item;
 
 class Board extends ObjectModel
 {

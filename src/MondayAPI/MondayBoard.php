@@ -1,10 +1,11 @@
 <?php
 
-namespace TBlack\MondayAPI\;
+namespace TBlack\MondayAPI;
 
-use TBlack\MondayAPI\ObjectTypes\Board as Board;
-use TBlack\MondayAPI\ObjectTypes\Column as Column;
-use TBlack\MondayAPI\ObjectTypes\Item as Item;
+use TBlack\MondayAPI\MondayAPI;
+use TBlack\MondayAPI\ObjectTypes\Board;
+use TBlack\MondayAPI\ObjectTypes\Column;
+use TBlack\MondayAPI\ObjectTypes\Item;
 
 class MondayBoard extends MondayAPI
 {

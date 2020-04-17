@@ -2,7 +2,7 @@
 
 namespace TBlack\MondayAPI\ObjectTypes;
 
-use TBlack\MondayAPI\ObjectTypes\ObjectModel as ObjectModel;
+use TBlack\MondayAPI\ObjectTypes\ObjectModel;
 
 class Column extends ObjectModel
 {

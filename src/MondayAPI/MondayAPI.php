@@ -2,7 +2,7 @@
 
 namespace TBlack\MondayAPI;
 
-use TBlack\MondayAPI\Querying\Collection as Collection;
+use TBlack\MondayAPI\Querying\Collection;
 
 class MondayAPI
 {	
