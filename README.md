@@ -32,7 +32,7 @@ $MondayBoard->setToken(new TBlack\MondayAPI\Token($token));
 $all_boards = $MondayBoard->getBoards();
 
 // gel Board with id:12121212
-$board = $MondayBoard->getBoards(['ids'=>12121212]);
+$board = $MondayBoard->on(12121212)->getBoards();
 
 // gel Board id:12121212 Columns
 $boardColumns = $MondayBoard->on(12121212)->getColumns();
