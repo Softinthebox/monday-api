@@ -40,6 +40,12 @@ class Item extends ObjectModel
 		'column_values' => '!JSON',
 	);
 
+	static $change_multiple_column_values = array(
+		'board_id'		=> '!Int',
+		'item_id'		=> 'Int',
+		'column_values' => '!JSON',
+	);
+
 	public function addItem($get = false, $args = false)
 	{
 		return $this->request(

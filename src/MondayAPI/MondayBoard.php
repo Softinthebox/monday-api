@@ -85,6 +85,29 @@ class MondayBoard extends MondayAPI
 		return $this->request(self::TYPE_MUTAT, $create);
 
 	}
+
+	public function changeMultipleColumnValues( int $item_id, array $column_values = [] )
+	{
+		if(!$this->board_id || !$this->group_id)
+			return -1;
+
+		$arguments = [
+			'board_id'		=> $this->board_id,
+			'item_id'		=> $item_id,
+			'column_values' => Column::newColumnValues( $column_values ),
+		];
+
+		$Item = new Item();
+
+		$create = Query::create( 
+			'change_multiple_column_values', 
+			$Item->getArguments($arguments, Item::$change_multiple_column_values), 
+			$Item->getFields(['id']) 
+		);
+
+		return $this->request(self::TYPE_MUTAT, $create);
+
+	}
 }
 
 

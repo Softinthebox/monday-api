@@ -39,7 +39,11 @@ $boardColumns = $MondayBoard->on(12121212)->getColumns();
 
 // Insert new Item on Board
 $column_values = [ 'text1' => 'Value...','text2' => 'Other value...' ];
-$boardColumns = $MondayBoard->on(12121212)->group('group_id')->addItem( 'My Item Title', $column_values );
+$item_id = $boardColumns = $MondayBoard->on(12121212)->group('group_id')->addItem( 'My Item Title', $column_values );
+
+// Update item on Board
+$column_values = [ 'text1' => 'New Value','text2' => 'New other value...' ];
+$boardColumns = $MondayBoard->on(12121212)->group('group_id')->changeMultipleColumnValues($item_id, $column_values );
 
 
 ```
