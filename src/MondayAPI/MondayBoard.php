@@ -10,8 +10,8 @@ use TBlack\MondayAPI\Querying\Query;
 
 class MondayBoard extends MondayAPI
 {
-	private $board_id = false;
-	private $group_id = false;
+	protected $board_id = false;
+	protected $group_id = false;
 
 	public function on( Int $board_id )
 	{
