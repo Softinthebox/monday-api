@@ -10,8 +10,8 @@ use TBlack\MondayAPI\Querying\Query;
 
 class MondayBoard extends MondayAPI
 {
-	private $board_id = false;
-	private $group_id = false;
+	protected $board_id = false;
+	protected $group_id = false;
 
 	public function on( Int $board_id )
 	{
@@ -33,10 +33,10 @@ class MondayBoard extends MondayAPI
 			$arguments['ids']=$this->board_id;
 		}
 
-		$boards = Query::create( 
-			Board::$scope, 
-			$Board->getArguments($arguments), 
-			$Board->getFields($fields) 
+		$boards = Query::create(
+			Board::$scope,
+			$Board->getArguments($arguments),
+			$Board->getFields($fields)
 		);
 
 		return $this->request( self::TYPE_QUERY, $boards );
@@ -47,15 +47,15 @@ class MondayBoard extends MondayAPI
 		$Column = new Column();
 		$Board = new Board();
 
-		$columns = Query::create( 
-			Column::$scope, 
-			'', 
-			$Column->getFields($fields) 
+		$columns = Query::create(
+			Column::$scope,
+			'',
+			$Column->getFields($fields)
 		);
 
-		$boards = Query::create( 
-			Board::$scope, 
-			$Board->getArguments(['ids'=>$this->board_id]), 
+		$boards = Query::create(
+			Board::$scope,
+			$Board->getArguments(['ids'=>$this->board_id]),
 			[$columns]
 		);
 
@@ -76,10 +76,10 @@ class MondayBoard extends MondayAPI
 
 		$Item = new Item();
 
-		$create = Query::create( 
-			'create_item', 
-			$Item->getArguments($arguments, Item::$create_item_arguments), 
-			$Item->getFields(['id']) 
+		$create = Query::create(
+			'create_item',
+			$Item->getArguments($arguments, Item::$create_item_arguments),
+			$Item->getFields(['id'])
 		);
 
 		return $this->request(self::TYPE_MUTAT, $create);
@@ -99,14 +99,19 @@ class MondayBoard extends MondayAPI
 
 		$Item = new Item();
 
-		$create = Query::create( 
-			'change_multiple_column_values', 
-			$Item->getArguments($arguments, Item::$change_multiple_column_values), 
-			$Item->getFields(['id']) 
+		$create = Query::create(
+			'change_multiple_column_values',
+			$Item->getArguments($arguments, Item::$change_multiple_column_values),
+			$Item->getFields(['id'])
 		);
 
 		return $this->request(self::TYPE_MUTAT, $create);
 
+	}
+
+	public function customQuery($query)
+	{
+		return $this->request(self::TYPE_QUERY, $query);
 	}
 }
 
