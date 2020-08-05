@@ -45,5 +45,19 @@ $item_id = $boardColumns = $MondayBoard->on(12121212)->group('group_id')->addIte
 $column_values = [ 'text1' => 'New Value','text2' => 'New other value...' ];
 $boardColumns = $MondayBoard->on(12121212)->group('group_id')->changeMultipleColumnValues($item_id, $column_values );
 
-
+// Run a custom query
+$query = 'boards (ids: 12121212) {
+        groups (ids: group_id) {
+            items {
+              id
+              name
+              column_values {
+                id
+                text
+                title
+              }
+            }
+          }
+        }';
+$items = $MondayBoard->customQuery($query);
 ```
