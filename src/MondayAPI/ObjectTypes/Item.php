@@ -46,7 +46,11 @@ class Item extends ObjectModel
 		'column_values' => '!JSON',
 	);
 
-	public function addItem($get = false, $args = false)
+	static $archive_delete_arguments = array(
+		'item_id'		=> 'Int'
+	);
+
+    public function addItem($get = false, $args = false)
 	{
 		return $this->request(
 			self::TYPE_MUTAT,

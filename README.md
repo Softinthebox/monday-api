@@ -39,11 +39,18 @@ $boardColumns = $MondayBoard->on(12121212)->getColumns();
 
 // Insert new Item on Board
 $column_values = [ 'text1' => 'Value...','text2' => 'Other value...' ];
-$item_id = $MondayBoard->on(12121212)->group('group_id')->addItem( 'My Item Title', $column_values );
+$addResult = $boardColumns = $MondayBoard->on(12121212)->group('group_id')->addItem( 'My Item Title', $column_values );
+$item_id = $addResult['create_item']['id'];
 
 // Update item on Board
 $column_values = [ 'text1' => 'New Value','text2' => 'New other value...' ];
 $boardColumns = $MondayBoard->on(12121212)->group('group_id')->changeMultipleColumnValues($item_id, $column_values );
+
+// Archive item
+$archiveId = $MondayBoard->on(12121212)->group('group_id')->archiveItem($item_id);
+
+// Delete item
+$deleteId = $MondayBoard->on(12121212)->group('group_id')->deleteItem($item_id);
 
 // Run a custom query
 $query = 'boards (ids: 12121212) {

@@ -83,7 +83,30 @@ class MondayBoard extends MondayAPI
 		);
 
 		return $this->request(self::TYPE_MUTAT, $create);
+	}
 
+	public function archiveItem( int $item_id ){
+		$Item = new Item();
+
+		$archive = Query::create(
+			'archive_item',
+			$Item->getArguments(['item_id' => $item_id], Item::$archive_delete_arguments),
+			$Item->getFields(['id'])
+		);
+
+		return $this->request(self::TYPE_MUTAT, $archive);
+	}
+
+	public function deleteItem( int $item_id ){
+		$Item = new Item();
+
+		$delete = Query::create(
+			'delete_item',
+			$Item->getArguments(['item_id' => $item_id], Item::$archive_delete_arguments),
+			$Item->getFields(['id'])
+		);
+
+		return $this->request(self::TYPE_MUTAT, $delete);
 	}
 
 	public function changeMultipleColumnValues( int $item_id, array $column_values = [] )
@@ -106,7 +129,6 @@ class MondayBoard extends MondayAPI
 		);
 
 		return $this->request(self::TYPE_MUTAT, $create);
-
 	}
 
 	public function customQuery($query)
