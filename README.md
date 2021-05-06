@@ -28,6 +28,9 @@ $token = 'API_TOKEN';
 $MondayBoard = new TBlack\MondayAPI\MondayBoard();
 $MondayBoard->setToken(new TBlack\MondayAPI\Token($token));
 
+```
+
+```php
 // gel All Boards
 $all_boards = $MondayBoard->getBoards();
 
