@@ -2,18 +2,16 @@
 
 namespace TBlack\MondayAPI\ObjectTypes;
 
-use TBlack\MondayAPI\ObjectTypes\ObjectModel;
-
 class User extends ObjectModel
 {
-	// Query scope
-	static $scope = 'owner';
+		// Query scope
+		static $scope = 'owner';
 
-	// Arguments
-	static $arguments = array();
+		// Arguments
+		static $arguments = array();
 
-	// Fields
-	static $fields = array();
+		// Fields
+		static $fields = array();
 }
 
 ?>
