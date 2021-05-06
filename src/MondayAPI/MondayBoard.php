@@ -85,6 +85,25 @@ class MondayBoard extends MondayAPI
 		return $this->request(self::TYPE_MUTAT, $create);
 	}
 
+	public function addSubItem( Int $parent_item_id, String $item_name, Array $itens = [] )
+	{
+		$arguments = [
+			'parent_item_id'	=> $parent_item_id,
+			'item_name' 			=> $item_name,
+			'column_values' 	=> Column::newColumnValues( $itens ),
+		];
+
+		$SubItem = new SubItem();
+
+		$create = Query::create(
+			'create_subitem',
+			$SubItem->getArguments($arguments, SubItem::$create_item_arguments),
+			$SubItem->getFields(['id'])
+		);
+
+		return $this->request(self::TYPE_MUTAT, $create);
+	}
+
 	public function archiveItem( int $item_id ){
 		$Item = new Item();
 
