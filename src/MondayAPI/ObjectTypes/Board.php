@@ -53,8 +53,8 @@ class Board extends ObjectModel
         'column_values'   => '!JSON',
     );
 
-    static $archive_delete_arguments = array(
-        'item_id'         => 'Int'
+    static $archive_arguments = array(
+        'board_id'         => '!Int'
     );
 }
 
