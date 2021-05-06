@@ -4,17 +4,17 @@ namespace TBlack\MondayAPI;
 
 class Token
 {
-		private $token = false;
+    private $token = false;
 
-		function __construct($token)
-		{
-				$this->token = $token;
-		}
+    function __construct($token)
+    {
+        $this->token = $token;
+    }
 
-		public function getToken()
-		{
-				return $this->token;
-		}
+    public function getToken()
+    {
+        return $this->token;
+    }
 }
 
 
