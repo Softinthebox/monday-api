@@ -31,31 +31,40 @@ $MondayBoard->setToken(new TBlack\MondayAPI\Token($token));
 
 ```
 
-Get boards
+Interact with boards
 ```php
-// gel All Boards
+
+# Get all boards
 $all_boards = $MondayBoard->getBoards();
 
-// gel Board with id:12121212
-$board = $MondayBoard->on(12121212)->getBoards();
+# Get Board id : 10012
+$board_id = 10012;
+$board = $MondayBoard->on($board_id)->getBoards();
 
-// gel Board id:12121212 Columns
-$boardColumns = $MondayBoard->on(12121212)->getColumns();
+# Get Board Columns
+$board_id = 10012;
+$boardColumns = $MondayBoard->on($board_id)->getColumns();
 
-// Insert new Item on Board
+```
+
+Interact with Itens
+```php
+# Insert new Item on Board
 $column_values = [ 'text1' => 'Value...','text2' => 'Other value...' ];
-$addResult = $boardColumns = $MondayBoard->on(12121212)->group('group_id')->addItem( 'My Item Title', $column_values );
+$board_id = 10012;
+$id_group = 'topics';
+$addResult = $MondayBoard->on($board_id)->group($id_group)->addItem( 'My Item Title', $column_values );
 $item_id = $addResult['create_item']['id'];
 
 // Update item on Board
 $column_values = [ 'text1' => 'New Value','text2' => 'New other value...' ];
-$boardColumns = $MondayBoard->on(12121212)->group('group_id')->changeMultipleColumnValues($item_id, $column_values );
+$boardColumns = $MondayBoard->on(10012)->group('group_id')->changeMultipleColumnValues($item_id, $column_values );
 
 // Archive item
-$archiveId = $MondayBoard->on(12121212)->group('group_id')->archiveItem($item_id);
+$archiveId = $MondayBoard->on(10012)->group('group_id')->archiveItem($item_id);
 
 // Delete item
-$deleteId = $MondayBoard->on(12121212)->group('group_id')->deleteItem($item_id);
+$deleteId = $MondayBoard->on(10012)->group('group_id')->deleteItem($item_id);
 
 # Create Board, if success return board_id
 $newboard = $MondayBoard->create( 'Teste Board', TBlack\MondayAPI\ObjectTypes\BoardKind::PUB );
