@@ -42,11 +42,11 @@ class Query
     *
     *   @return =>  ex.: (ids:212121,name:"teste")
     */
-    public static function buildArguments( Array $array )
+    public static function buildArguments( Array $array , String $prepend = '')
     {
         if(empty($array))
             return '';
-        return '(' . implode(',',self::array_map_assoc(function($k,$v){
+        return '(' . $prepend . implode(',',self::array_map_assoc(function($k,$v){
             if(is_string($v)){
                 return $k.':"'.$v.'"';
             }elseif(is_array($v)){

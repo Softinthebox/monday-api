@@ -47,23 +47,6 @@ class Item extends ObjectModel
     static $archive_delete_arguments = array(
         'item_id'         => 'Int'
     );
-
-    public function addItem($get = false, $args = false)
-    {
-        return $this->request(
-            self::TYPE_MUTAT,
-            $this->create(
-                'create_item',
-                $this->buildArguments(
-                    $this->buildArgsFields(
-                        Board::$struct_arguments_item,
-                        $args
-                    )
-                ),
-                $get
-            )
-        );
-    }
 }
 
 

@@ -2,6 +2,8 @@
 
 namespace TBlack\MondayAPI\ObjectTypes;
 
+use TBlack\MondayAPI\Querying\Query;
+
 class ObjectModel
 {
     // Query scope
@@ -28,13 +30,14 @@ class ObjectModel
         )];
     }
 
-    public function getArguments( Array $arguments = [], $alt_arguments = false )
+    public function getArguments( Array $arguments = [], $alt_arguments = false, String $prepend_args = '' )
     {
         return Query::buildArguments(
             Query::buildArgsFields(
                 ($alt_arguments==false?static::$arguments:$alt_arguments),
                 $arguments
-            )
+            ),
+            $prepend_args
         );
     }
 

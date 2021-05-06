@@ -12,9 +12,6 @@
   },
   "autoload" : {
     "psr-4" : {
-      "TBlack\\MondayAPI\\ObjectTypes\\": "src/MondayAPI/ObjectTypes",
-      "TBlack\\MondayAPI\\Validate\\": "src/MondayAPI/Validate",
-      "TBlack\\MondayAPI\\Querying\\": "src/MondayAPI/Querying",
       "TBlack\\MondayAPI\\": "src/MondayAPI"
     }
   },

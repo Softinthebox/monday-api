@@ -5,6 +5,7 @@ namespace TBlack\MondayAPI;
 use TBlack\MondayAPI\ObjectTypes\Board;
 use TBlack\MondayAPI\ObjectTypes\Column;
 use TBlack\MondayAPI\ObjectTypes\Item;
+use TBlack\MondayAPI\ObjectTypes\BoardKind;
 use TBlack\MondayAPI\Querying\Query;
 
 class MondayBoard extends MondayAPI
@@ -22,6 +23,21 @@ class MondayBoard extends MondayAPI
     {
         $this->group_id = $group_id;
         return $this;
+    }
+
+    public function create( String $board_name, String $board_kind = BoardKind::PRV, Array $optionals = [] )
+    {
+        $Board = new Board();
+
+        $arguments = array_merge( ['board_name' => $board_name], $optionals);
+
+        $create = Query::create(
+            'create_board',
+            $Board->getArguments($arguments, Board::$create_item_arguments, ' board_kind:'.$board_kind.', '),
+            $Board->getFields(['id'])
+        );
+
+        return $this->request(self::TYPE_MUTAT, $create);
     }
 
     public function getBoards( Array $arguments = [], Array $fields = [])

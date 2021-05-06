@@ -52,8 +52,9 @@ $archiveId = $MondayBoard->on(12121212)->group('group_id')->archiveItem($item_id
 // Delete item
 $deleteId = $MondayBoard->on(12121212)->group('group_id')->deleteItem($item_id);
 
-# Create Board
-$deleteId = $MondayBoard->on(12121212)->group('group_id')->deleteItem($item_id);
+# Create Board, if success return board_id
+$newboard = $MondayBoard->create( 'Teste Board', TBlack\MondayAPI\ObjectTypes\BoardKind::PUB );
+$board_id = $newboard['create_board']['id'];
 
 // Run a custom query
 $query = 'boards (ids: 12121212) {
