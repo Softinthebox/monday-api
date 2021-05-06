@@ -45,44 +45,72 @@ $board = $MondayBoard->on($board_id)->getBoards();
 $board_id = 10012;
 $boardColumns = $MondayBoard->on($board_id)->getColumns();
 
+# Create Board, if success return board_id
+$newboard = $MondayBoard->create( 'New Board Name', TBlack\MondayAPI\ObjectTypes\BoardKind::PUB );
+$board_id = $newboard['create_board']['id'];
+
 ```
 
 Interact with Itens
 ```php
 # Insert new Item on Board
-$column_values = [ 'text1' => 'Value...','text2' => 'Other value...' ];
 $board_id = 10012;
 $id_group = 'topics';
-$addResult = $MondayBoard->on($board_id)->group($id_group)->addItem( 'My Item Title', $column_values );
+$column_values = [ 'text1' => 'Value...','text2' => 'Other value...' ];
+
+$addResult = $MondayBoard
+              ->on($board_id)
+              ->group($id_group)
+              ->addItem( 'My Item Title', $column_values );
+
+# if succes return
 $item_id = $addResult['create_item']['id'];
 
-// Update item on Board
+# For update Item
+$item_id = 34112;
 $column_values = [ 'text1' => 'New Value','text2' => 'New other value...' ];
-$boardColumns = $MondayBoard->on(10012)->group('group_id')->changeMultipleColumnValues($item_id, $column_values );
 
-// Archive item
-$archiveId = $MondayBoard->on(10012)->group('group_id')->archiveItem($item_id);
+$updateResult = $MondayBoard
+              ->on($board_id)
+              ->group($id_group)
+              ->changeMultipleColumnValues($item_id, $column_values );
+
+# Archive item
+$result = $MondayBoard
+              ->on($board_id)
+              ->group($id_group)
+              ->archiveItem($item_id);
 
 // Delete item
-$deleteId = $MondayBoard->on(10012)->group('group_id')->deleteItem($item_id);
+$result = $MondayBoard
+              ->on($board_id)
+              ->group($id_group)
+              ->deleteItem($item_id);
 
-# Create Board, if success return board_id
-$newboard = $MondayBoard->create( 'Teste Board', TBlack\MondayAPI\ObjectTypes\BoardKind::PUB );
-$board_id = $newboard['create_board']['id'];
+```
+
+If you need specific action, you can run a custom Query or Mutation
+```php
 
 // Run a custom query
-$query = 'boards (ids: 12121212) {
-        groups (ids: group_id) {
-            items {
-              id
-              name
-              column_values {
-                id
-                text
-                title
-              }
-            }
-          }
-        }';
-$items = $MondayBoard->customQuery($query);
+$query = '
+boards (ids: 12121212) {
+  groups (ids: group_id) {
+    items {
+      id
+      name
+      column_values {
+        id
+        text
+        title
+      }
+    }
+  }
+}';
+
+# For Query
+$items = $MondayBoard->customQuery( $query );
+
+# For Mutation
+$items = $MondayBoard->customMutation( $query );
 ```
