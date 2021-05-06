@@ -135,6 +135,11 @@ class MondayBoard extends MondayAPI
 	{
 		return $this->request(self::TYPE_QUERY, $query);
 	}
+
+	public function customMutation($query)
+	{
+		return $this->request(self::TYPE_MUTAT, $query);
+	}
 }
 
 
