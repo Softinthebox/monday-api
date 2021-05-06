@@ -4,14 +4,14 @@ namespace TBlack\MondayAPI\ObjectTypes;
 
 class BoardView extends ObjectModel
 {
-		// Query scope
-		static $scope = 'views';
+    // Query scope
+    static $scope = 'views';
 
-		// Arguments
-		static $arguments = array();
+    // Arguments
+    static $arguments = array();
 
-		// Fields
-		static $fields = array();
+    // Fields
+    static $fields = array();
 }
 
 ?>
