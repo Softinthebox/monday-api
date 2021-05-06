@@ -38,7 +38,7 @@ class MondayAPI
 		return json_encode(['query' => $type.' { '.$request.' } ']);
 	}
 
-	protected function request( $type = self::TYPE_QUERY, $request )
+	protected function request( $type = self::TYPE_QUERY, $request = null )
 	{
 		$headers = [ 
 			'Content-Type: application/json', 
