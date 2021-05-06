@@ -19,6 +19,7 @@ Note that the `vendor` folder and the `vendor/autoload.php` script are generated
 Examples
 --------
 
+Init Monday connector
 ```php
 <?php
 
@@ -30,6 +31,7 @@ $MondayBoard->setToken(new TBlack\MondayAPI\Token($token));
 
 ```
 
+Get boards
 ```php
 // gel All Boards
 $all_boards = $MondayBoard->getBoards();
