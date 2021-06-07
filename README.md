@@ -5,7 +5,7 @@ Monday.com API
 Monday API is available on [Packagist](https://packagist.org/packages/tblack-it/monday-api) (using semantic versioning), and installation via [Composer](https://getcomposer.org) is the recommended way to install Monday API. Just add this line to your `composer.json` file:
 
 ```json
-"tblack-it/monday-api": "~0.1"
+"tblack-it/monday-api": "~0.2"
 ```
 
 or run
