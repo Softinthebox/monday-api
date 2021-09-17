@@ -2,11 +2,11 @@
 
 namespace TBlack\MondayAPI;
 
+use TBlack\MondayAPI\Querying\Query;
+use TBlack\MondayAPI\ObjectTypes\Item;
 use TBlack\MondayAPI\ObjectTypes\Board;
 use TBlack\MondayAPI\ObjectTypes\Column;
-use TBlack\MondayAPI\ObjectTypes\Item;
 use TBlack\MondayAPI\ObjectTypes\BoardKind;
-use TBlack\MondayAPI\Querying\Query;
 
 class MondayBoard extends MondayAPI
 {
@@ -94,16 +94,16 @@ class MondayBoard extends MondayAPI
         return $this->request( self::TYPE_QUERY, $boards );
     }
 
-    public function addItem( String $item_name, Array $itens = [] )
+    public function addItem(String $item_name, array $itens = [], $create_labels_if_missing = false)
     {
-        if(!$this->board_id || !$this->group_id)
-          return -1;
+        if (!$this->board_id || !$this->group_id)
+            return -1;
 
         $arguments = [
             'board_id'    => $this->board_id,
             'group_id'    => $this->group_id,
             'item_name'   => $item_name,
-            'column_values' => Column::newColumnValues( $itens ),
+            'column_values' => Column::newColumnValues($itens),
         ];
 
         $Item = new Item();
@@ -113,6 +113,9 @@ class MondayBoard extends MondayAPI
             $Item->getArguments($arguments, Item::$create_item_arguments),
             $Item->getFields(['id'])
         );
+
+        if ($create_labels_if_missing)
+            $create = str_replace('}"){', '}", create_labels_if_missing:true){', $create);
 
         return $this->request(self::TYPE_MUTAT, $create);
     }
