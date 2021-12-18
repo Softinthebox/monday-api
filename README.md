@@ -63,6 +63,12 @@ $addResult = $MondayBoard
               ->group($id_group)
               ->addItem( 'My Item Title', $column_values );
 
+# If you want to use the `create_labels_if_missing` arguments; just add `true` as the third arguments (default: `false`)
+$addResult = $MondayBoard
+              ->on($board_id)
+              ->group($id_group)
+              ->addItem( 'My Item Title', $column_values, true);
+
 # if succes return
 $item_id = $addResult['create_item']['id'];
 
