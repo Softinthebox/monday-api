@@ -4,6 +4,7 @@ namespace TBlack\MondayAPI;
 
 use TBlack\MondayAPI\Querying\Query;
 use TBlack\MondayAPI\ObjectTypes\Item;
+use TBlack\MondayAPI\ObjectTypes\SubItem;
 use TBlack\MondayAPI\ObjectTypes\Board;
 use TBlack\MondayAPI\ObjectTypes\Column;
 use TBlack\MondayAPI\ObjectTypes\BoardKind;
