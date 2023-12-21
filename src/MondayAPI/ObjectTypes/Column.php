@@ -30,7 +30,7 @@ class Column extends ObjectModel
                 $column_values[$key] = self::newColValue($key, $value);
             }
         }
-        return addslashes(json_encode($column_values, JSON_PRETTY_PRINT));
+        return addslashes(json_encode($column_values));
     }
 
 }

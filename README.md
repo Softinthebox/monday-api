@@ -120,3 +120,8 @@ $items = $MondayBoard->customQuery( $query );
 # For Mutation
 $items = $MondayBoard->customMutation( $query );
 ```
+
+To get the error message
+```php
+$error = $MondayBoard->error;
+```
