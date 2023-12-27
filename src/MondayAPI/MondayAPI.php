@@ -50,7 +50,8 @@ class MondayAPI
             $headers = [
                 'Content-Type: application/json',
                 'User-Agent: [Tblack-IT] GraphQL Client',
-                'Authorization: ' . $this->APIV2_Token->getToken()
+                'Authorization: ' . $this->APIV2_Token->getToken(),
+//                'API-Version: 2023-10',
             ];
 
             $data = @file_get_contents($this->API_Url, false, stream_context_create([
