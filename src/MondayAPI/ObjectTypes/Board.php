@@ -30,7 +30,6 @@ class Board extends ObjectModel
         'name'              => [ 'type' => '!String'      ],
         'owner'             => [ 'type' => '!User'        , 'object' => 'User' ],
         'permissions'       => [ 'type' => '!String'      ],
-        'pos'               => [ 'type' => 'String'        ],
         'state'             => [ 'type' => '!State'        ],
         'subscribers'       => [ 'type' => '![User]'      , 'object' => 'User' ],
         'tags'              => [ 'type' => '[Tag]'        , 'object' => 'Tag' ],

@@ -10,7 +10,6 @@ class Column extends ObjectModel
     static $fields = array(
         'archived'       => [ 'type' => '!Boolean',   ],
         'id'             => [ 'type' => '!ID',    ],
-        'pos'            => [ 'type' => 'String',   ],
         'settings_str'   => [ 'type' => '!String',   ],
         'title'          => [ 'type' => '!String',   ],
         'type'           => [ 'type' => '!String',   ],
